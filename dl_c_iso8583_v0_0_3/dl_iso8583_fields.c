@@ -457,9 +457,10 @@ DL_ERR _pack_iso_BITMAP ( DL_UINT16                    iField,
 		int       j;
 
 		/* move to next field */
-		curFieldIdx++;
+		if(i == 0)
+			curFieldIdx++;
 
-		for ( j=0 ; j<31 ; j++,curFieldIdx++ )
+		for ( j=0 ; j<31 + i ; j++,curFieldIdx++ )
 		{
 			ms <<= 1;
 			if ( (curFieldIdx <= kDL_ISO8583_MAX_FIELD_IDX) &&
@@ -516,12 +517,13 @@ DL_ERR _unpack_iso_BITMAP ( DL_UINT16                    iField,
 {
 	DL_ERR     err    = kDL_ERR_NONE;
 	DL_UINT8  *tmpPtr = *ioPtr;
+	DL_UINT32 i = 0;
 
 	{
 		DL_UINT16 curFieldIdx = iField;
 
 		/* for each bitmap segment (8 bytes) */
-		do
+		while(i<(((kDL_ISO8583_MAX_FIELD_IDX-iField+1)+63)/64))
 		{
 			DL_UINT32 ms,ls;
 			int       j;
@@ -532,10 +534,11 @@ DL_ERR _unpack_iso_BITMAP ( DL_UINT16                    iField,
 			tmpPtr += 8;
 
 			/* move to next field */
+			if(i == 0)
 			curFieldIdx++;
 
 			/* ms part */
-			for ( j=30 ; j>=0 ; j--,curFieldIdx++ )
+			for ( j=30 + i ; j>=0 ; j--,curFieldIdx++ )
 			{
 				if ( DL_BIT_TEST(ms,j) )
 				{
@@ -561,9 +564,13 @@ DL_ERR _unpack_iso_BITMAP ( DL_UINT16                    iField,
 			} /* end-for(j) */
 
 			/* stop if no more bitmap segments */
+			if( i == 0)
+			{
 			if ( 0 == DL_BIT_TEST(ms,31) )
 				break;
-		} while ( !err );
+			}
+			i++;
+		}
 	}
 
 	*ioPtr = tmpPtr;
