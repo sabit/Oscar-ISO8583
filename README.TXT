@@ -33,7 +33,7 @@ COMPILATION
 Simply compile all the provided source code to run the demo application, from
 there you can easily integrate the DL ISO-8583 library into other projects.
 
-If using MSVC 6.0 then simply open the applicable DSW file.
+If using MSVC 6.0 then just open the applicable DSW file.
 
 CHANGE HISTORY
 --------------
@@ -47,4 +47,4 @@ This version includes the following changes:
 BUGS / SUGGESTIONS
 ------------------
 
-Please email any bugs or suggestions to 'o.sanderson@gmail.com'.
+Please feel free to email any bugs or suggestions to 'o.sanderson@gmail.com'.
