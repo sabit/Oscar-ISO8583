@@ -183,7 +183,7 @@ DL_ERR _pack_iso_ASCHEX ( DL_UINT16                    iField,
 	DL_UINT32             i;
 
 	/* variable length handling */
-	err = VarLen_Put(iFieldDefPtr->varLen,actLen,&reqLen,&tmpPtr);
+	err = VarLen_Put(iFieldDefPtr->varLen,actLen,&reqLen,(DL_UINT8**)&tmpPtr);
 
 	if ( !err )
 	{
@@ -244,7 +244,7 @@ DL_ERR _unpack_iso_ASCHEX ( DL_UINT16                    iField,
 	DL_UINT8  *tmpDataPtr = NULL;
 
 	/* variable length handling */
-	err = VarLen_Get(&tmpPtr,iFieldDefPtr->varLen,iFieldDefPtr->len,&size);
+	err = VarLen_Get((const DL_UINT8**)&tmpPtr,iFieldDefPtr->varLen,iFieldDefPtr->len,&size);
 
 	/* allocate field */
 	if ( !err )
@@ -296,7 +296,7 @@ DL_ERR _pack_iso_ASCII ( DL_UINT16                    iField,
 	DL_UINT32             reqLen   = iFieldDefPtr->len;
 
 	/* variable length handling */
-	err = VarLen_Put(iFieldDefPtr->varLen,actLen,&reqLen,&tmpPtr);
+	err = VarLen_Put(iFieldDefPtr->varLen,actLen,&reqLen,(DL_UINT8**)&tmpPtr);
 
 	if ( !err )
 	{
@@ -339,7 +339,7 @@ DL_ERR _unpack_iso_ASCII ( DL_UINT16                    iField,
 	DL_UINT8  *tmpDataPtr = NULL;
 
 	/* variable length handling */
-	err = VarLen_Get(&tmpPtr,iFieldDefPtr->varLen,iFieldDefPtr->len,&size);
+	err = VarLen_Get((const DL_UINT8**)&tmpPtr,iFieldDefPtr->varLen,iFieldDefPtr->len,&size);
 
 	/* allocate field */
 	if ( !err )
@@ -374,7 +374,7 @@ DL_ERR _pack_iso_BINARY ( DL_UINT16                    iField,
 	DL_UINT32             reqLen   = iFieldDefPtr->len;
 
 	/* variable length handling */
-	err = VarLen_Put(iFieldDefPtr->varLen,actLen,&reqLen,&tmpPtr);
+	err = VarLen_Put(iFieldDefPtr->varLen,actLen,&reqLen,(DL_UINT8**)&tmpPtr);
 
 	if ( !err )
 	{
@@ -417,7 +417,7 @@ DL_ERR _unpack_iso_BINARY ( DL_UINT16                    iField,
 	DL_UINT8  *tmpDataPtr = NULL;
 
 	/* variable length handling */
-	err = VarLen_Get(&tmpPtr,iFieldDefPtr->varLen,iFieldDefPtr->len,&size);
+	err = VarLen_Get((const DL_UINT8**)&tmpPtr,iFieldDefPtr->varLen,iFieldDefPtr->len,&size);
 
 	/* allocate field */
 	if ( !err )

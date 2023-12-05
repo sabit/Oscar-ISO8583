@@ -275,7 +275,7 @@ void DL_ISO8583_MSG_Dump ( FILE                     *iOutFile,
 					       const DL_ISO8583_MSG     *iMsg )
 {
 	DL_UINT16 i;
-	char     *tmpEOL = _iEolStr == NULL ? "\n" : _iEolStr;
+	const char     *tmpEOL = _iEolStr == NULL ? "\n" : _iEolStr;
 
 	fprintf(iOutFile,"%s--------------- ISO8583 MSG DUMP ---------------%s",
 			tmpEOL,tmpEOL);
