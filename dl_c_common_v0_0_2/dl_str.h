@@ -44,9 +44,6 @@ extern DL_CHAR kDL_STR_EmptyStr[1];
 // MACROS
 //
 
-/* returns an empty string if the pointer is NULL */
-#define DL_STR_SafeStr(str)\
- ((str)==NULL?kDL_STR_EmptyStr:(str))
 
 /* accepts a pointer to a numeric - outputs safe values (ie 0 if NULL) */
 #define DL_STR_SafeNum(a)\
@@ -64,6 +61,8 @@ extern DL_CHAR kDL_STR_EmptyStr[1];
 /* returns: static pointer to the request environment variable OR empty */
 /*          string if not found / set                                   */
 DL_CHAR *DL_STR_GetEnv ( const DL_CHAR *iEnvStr );
+/* returns an empty string if the pointer is NULL */
+DL_CHAR *DL_STR_SafeStr ( const DL_CHAR *iStr );
 
 /******************************************************************************/
 

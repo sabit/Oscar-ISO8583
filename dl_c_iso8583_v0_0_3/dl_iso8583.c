@@ -238,7 +238,7 @@ DL_ERR DL_ISO8583_MSG_Unpack ( const DL_ISO8583_HANDLER *iHandler,
 	int        haveBitmap  = 0;
 
 	/* unpack all fields until we've encountered a bitmap field */
-	while ( !err && (curFieldIdx < maxFieldIdx) && (curPtr < endPtr) && !haveBitmap )
+	while ( !err && (curFieldIdx <= maxFieldIdx) && (curPtr < endPtr) && !haveBitmap )
 	{
 		err = _DL_ISO8583_FIELD_Unpack(curFieldIdx,ioMsg,iHandler,&curPtr);
 
@@ -250,7 +250,7 @@ DL_ERR DL_ISO8583_MSG_Unpack ( const DL_ISO8583_HANDLER *iHandler,
 	} /* end-while */
 
 	/* unpack only present fields (if any) after bitmap field */
-	while ( !err && (curFieldIdx < maxFieldIdx) && (curPtr < endPtr) )
+	while ( !err && (curFieldIdx <= maxFieldIdx) && (curPtr < endPtr) )
 	{
 		if ( 0 != ioMsg->field[curFieldIdx].len ) /* present */
 		{
@@ -275,7 +275,7 @@ void DL_ISO8583_MSG_Dump ( FILE                     *iOutFile,
 					       const DL_ISO8583_MSG     *iMsg )
 {
 	DL_UINT16 i;
-	char     *tmpEOL = _iEolStr == NULL ? "\n" : _iEolStr;
+	const char     *tmpEOL = _iEolStr == NULL ? "\n" : _iEolStr;
 
 	fprintf(iOutFile,"%s--------------- ISO8583 MSG DUMP ---------------%s",
 			tmpEOL,tmpEOL);

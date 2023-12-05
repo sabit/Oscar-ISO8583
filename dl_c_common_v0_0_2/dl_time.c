@@ -335,7 +335,7 @@ void DL_TIME_ConvUTCSecondsToLocalFormatStr ( DL_UINT32  iUtcSecs,
 	DL_TIME st;
 
 	/* init outputs */
-	sprintf(ioFormatStr,"");
+	sprintf(ioFormatStr, "%s", "");
 
 	/* convert UTC seconds to Local structure */
 	DL_TIME_ConvUTCSecondsToLocalStruct(iUtcSecs,&st);

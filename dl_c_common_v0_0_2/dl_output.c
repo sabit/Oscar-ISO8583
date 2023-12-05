@@ -44,7 +44,7 @@ void DL_OUTPUT_Hex ( FILE           *iOutFile,
 {
 	DL_UINT32  rowIdx,
 		       colIdx;
-	char      *tmpEOL  = _iEolStr == NULL ? "\n" : _iEolStr;
+	const char      *tmpEOL  = _iEolStr == NULL ? "\n" : _iEolStr;
 
 	for ( rowIdx=0 ; rowIdx<(iNumBytes+kDL_OUTPUT_HEX_COLS-1)/kDL_OUTPUT_HEX_COLS ; rowIdx++ )
 	{

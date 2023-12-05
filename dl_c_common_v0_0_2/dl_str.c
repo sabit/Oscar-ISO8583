@@ -26,6 +26,7 @@
 /*                                                                            */
 /******************************************************************************/
 
+#include <ctype.h>
 #include "dl_str.h"
 
 /******************************************************************************/
@@ -45,7 +46,12 @@ static void unescape_string ( DL_CHAR  iEscCh,
 
 DL_CHAR *DL_STR_GetEnv ( const DL_CHAR *iEnvStr )
 {
-    return DL_STR_SafeStr(getenv(iEnvStr));
+    return (DL_CHAR*) DL_STR_SafeStr(getenv(iEnvStr));
+}
+
+DL_CHAR *DL_STR_SafeStr ( const DL_CHAR *iStr )
+{
+	return (DL_CHAR*) (iStr == NULL ? kDL_STR_EmptyStr : iStr);
 }
 
 /******************************************************************************/
@@ -206,7 +212,7 @@ DL_ERR DL_STR_StrNDup ( const DL_CHAR  *iStr,
 	{
 		err = kDL_ERR_OTHER;
 	}
-	else if ( err = DL_MEM_malloc(iMaxChars+1,oStr) )
+	else if ( err = DL_MEM_malloc(iMaxChars+1,(void **)oStr) )
 	{
 		/* error - do nothing */
 	}
@@ -240,7 +246,7 @@ DL_ERR DL_STR_StrCat ( const DL_CHAR  *iStr1,
 	str2len = DL_STR_StrLen(iStr2);
 
 	/* allocate memory for combined string */
-	err = DL_MEM_malloc(str1len+str2len+1,oStr);
+	err = DL_MEM_malloc(str1len+str2len+1,(void **)oStr);
 
 	if ( !err )
 	{
@@ -430,7 +436,7 @@ DL_ERR DL_STR_EncapsulateStr ( const DL_CHAR  *iStr,
 	*oStr = NULL;
 
 	/* allocate working buffer (NB (Length(iStr)*2)+2+1 ) */
-	err = DL_MEM_malloc((DL_STR_StrLen(iStr)*2)+2+1,&bufPtr);
+	err = DL_MEM_malloc((DL_STR_StrLen(iStr)*2)+2+1,(void **)&bufPtr);
 
 	if ( !err )
 	{
